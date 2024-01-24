@@ -4,6 +4,11 @@ Challenge08 Module 8 Build a weather Dashboard to run in the browser
 
 THe challenge this week is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
 
+# URL for both repo and final deployed solution
+
+https://github.com/gnavea123/weatherDashboard repo for solution
+https://gnavea123.github.io/weatherDashboard/ solution url
+
 ## User Story
 
 AS A traveler I WANT to see the weather outlook for multiple cities SO THAT I can plan a trip accordingly
