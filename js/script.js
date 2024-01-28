@@ -8,28 +8,12 @@ var APIKey = "e248b13b3adb6046dcac73b0fc1980f3";
 $("#search-button").on("click", function (event) {
   event.preventDefault();
 
+  // Empty the section associated with the city variables
+  clear();
+
   var city = $("#search-input").val();
   console.log("button City: ");
   console.log(city);
-
-  // function displayCityInfo(event) {
-  //   // event.preventDefault();
-  //   //var userSelection = event.target;
-  //   //console.log(event);
-  //   // console.log(userSelection);
-  //   var userInput = $("#search-button").val();
-  //   console.log("Value of userINput: ");
-  //   console.log(userInput);
-
-  //   var city = $(this).attr(userInput);
-  //   // console.log(city);
-  //   // var queryURL = "https://www.omdbapi.com/?q=" + city + "&apikey=trilogy";
-
-  // var queryURL =
-  //   "https://api.openweathermap.org/data/2.5/weather?q=" +
-  //   city +
-  //   "&appid=" +
-  //   APIKey;
 
   //------------------  Geocoding API to obtain latitutde and longitude coordinates
   //
@@ -83,10 +67,6 @@ $("#search-button").on("click", function (event) {
           var today = dayjs();
           var reformatDate = dayjs(today).format("DD/MM/YYYY");
 
-          // var reformatDate = dayjs(today, "DD-MM-YY").format(
-          //   "dddd, D MMMM YYYY, h:mm:ss a"
-          // );
-          //$("#currentDay").text(reformatDate);
           var currentHour = dayjs().format("HH");
           console.log(reformatDate);
           console.log(currentHour);
@@ -95,6 +75,7 @@ $("#search-button").on("click", function (event) {
           var humidity = result.main.humidity;
           var windSpeed = result.wind.speed;
           var tempKelvin = result.main.temp;
+          console.log(tempKelvin);
           var tempCelcius = tempKelvin - 273.15;
           // CAlling DayJS for date format
 
@@ -112,12 +93,64 @@ $("#search-button").on("click", function (event) {
           // * An icon representation of weather cond itions
 
           console.log("Actual Temperature Celcius: ");
-          console.log(tempCelcius);
+          console.log(tempCelcius.toFixed(2));
           console.log("Actual Humidity: ");
           console.log(humidity);
           console.log("Actual Wind Speed: ");
           console.log(windSpeed);
+          // -----
+          // -- Capturing data to load to HTML
+
+          // Create the  list group to contain city variables and add the  content for each city
+          var $cityVariables = $("<ul>");
+          $cityVariables.addClass("list-group");
+          // Add the newly created element to the DOM
+          $("#article.section").append($cityVariables);
+
+          // If the article has a headline, log and append to $articleList
+          //var headline = article.headline.main;
+          var $cityVariablestItem = $(
+            "<li class='list-group-item cityVariables'>"
+          );
+
+          // console.log($cityVariablesItem);
+          $cityVariablestItem.append(
+            "<h2>" + city + "  (" + reformatDate + "  )" + "</h2>"
+          );
+          // --------
+          // Article abstract details
+
+          //var abstract = article.abstract;
+          $cityVariablestItem.append(
+            "<h3>Temperature: " + tempCelcius.toFixed(3) + " Celcius" + "</h3>"
+          );
+
+          //---Section Name for Article
+          // var section = article.section_name;
+          // console.log("Section Name: ");
+          // console.log(article.section_name);
+          $cityVariablestItem.append(
+            "<h3>Wind: " + windSpeed + " KMH" + "</h3>"
+          );
+
+          // humidity variable
+          $cityVariablestItem.append(
+            "<h3>Humidity: " + humidity + " %" + "</h3>"
+          );
+
+          console.log(windSpeed);
+          console.log("validating variableListItem: ");
+          console.log($cityVariablestItem);
+
+          // Append the variables
+          $cityVariables.append($cityVariablestItem);
+          $("#article-section").append($cityVariables);
         });
     });
+  $;
+  // Function to empty out the city variables section
+  function clear() {
+    $("#article-section").empty();
+  }
 });
 //   //
