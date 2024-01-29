@@ -101,13 +101,18 @@ $("#search-button").on("click", function (event) {
               "<h3>" + result.dt_txt.split(" ")[0] + "</h3>"
             );
             // icon
-            //  <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon">
+            //  <img src="https://openweathermap.org/img/wn/04n@2x.png" alt="weather-icon">
+            console.log("value of icon location:");
+            console.log(result.weather[0].icon);
+
             $cityForecasttItem.append(
               "<img src=" +
-                "https://openweathermap.org/img/wn/(result.weather.icon)" +
+                "https://openweathermap.org/img/wn/" +
+                result.weather[0].icon +
                 "@2x.png" +
-                "+alt=" +
-                "weather-icon>"
+                // "+alt=" +
+                // "weather-icon" +
+                ">"
               //
             );
 
