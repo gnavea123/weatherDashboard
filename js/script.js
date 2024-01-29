@@ -31,12 +31,12 @@ $("#search-button").on("click", function (event) {
       return response.json();
     })
     .then(function (result) {
-      console.log("Display Results geo API 1.0 : ");
-      console.log(result);
-      console.log("LAtitude");
-      console.log(result["0"].lat);
-      console.log("Longitud");
-      console.log(result["0"].lon);
+      // console.log("Display Results geo API 1.0 : ");
+      // console.log(result);
+      // console.log("LAtitude");
+      // console.log(result["0"].lat);
+      // console.log("Longitud");
+      // console.log(result["0"].lon);
 
       // ------------------  getting info from API using lat and longitude coordinates
 
@@ -62,8 +62,8 @@ $("#search-button").on("click", function (event) {
           return response.json();
         })
         .then(function (result) {
-          console.log("Display Results geo API 2.5.0 : ");
-          console.log(result);
+          // console.log("Display Results geo API 2.5.0 : ");
+          // console.log(result);
           var today = dayjs();
           var reformatDate = dayjs(today).format("DD/MM/YYYY");
 
@@ -75,7 +75,7 @@ $("#search-button").on("click", function (event) {
           var humidity = result.main.humidity;
           var windSpeed = result.wind.speed;
           var tempKelvin = result.main.temp;
-          console.log(tempKelvin);
+          // console.log(tempKelvin);
           var tempCelcius = tempKelvin - 273.15;
           // CAlling DayJS for date format
 
@@ -86,18 +86,18 @@ $("#search-button").on("click", function (event) {
           // * The humidity
           // * The wind speed
 
-          console.log("CIty: ");
-          console.log(city);
-          console.log("Date: ");
-          console.log(reformatDate);
-          // * An icon representation of weather cond itions
+          // console.log("CIty: ");
+          // console.log(city);
+          // console.log("Date: ");
+          // console.log(reformatDate);
+          // // * An icon representation of weather cond itions
 
-          console.log("Actual Temperature Celcius: ");
-          console.log(tempCelcius.toFixed(2));
-          console.log("Actual Humidity: ");
-          console.log(humidity);
-          console.log("Actual Wind Speed: ");
-          console.log(windSpeed);
+          // console.log("Actual Temperature Celcius: ");
+          // console.log(tempCelcius.toFixed(2));
+          // console.log("Actual Humidity: ");
+          // console.log(humidity);
+          // console.log("Actual Wind Speed: ");
+          // console.log(windSpeed);
           // -----
           // -- Capturing data to load to HTML
 
@@ -105,7 +105,7 @@ $("#search-button").on("click", function (event) {
           var $cityVariables = $("<ul>");
           $cityVariables.addClass("list-group");
           // Add the newly created element to the DOM
-          $("#article.section").append($cityVariables);
+          //$("#article.section").append($cityVariables);
 
           // If the article has a headline, log and append to $articleList
           //var headline = article.headline.main;
@@ -122,7 +122,7 @@ $("#search-button").on("click", function (event) {
 
           //var abstract = article.abstract;
           $cityVariablestItem.append(
-            "<h3>Temperature: " + tempCelcius.toFixed(3) + " Celcius" + "</h3>"
+            "<h3>Temperature: " + tempCelcius.toFixed(2) + " Celcius" + "</h3>"
           );
 
           //---Section Name for Article
@@ -138,19 +138,47 @@ $("#search-button").on("click", function (event) {
             "<h3>Humidity: " + humidity + " %" + "</h3>"
           );
 
-          console.log(windSpeed);
-          console.log("validating variableListItem: ");
-          console.log($cityVariablestItem);
+          // console.log(windSpeed);
+          // console.log("validating variableListItem: ");
+          // console.log($cityVariablestItem);
 
           // Append the variables
           $cityVariables.append($cityVariablestItem);
-          $("#article-section").append($cityVariables);
+          $("#dashboard-section").append($cityVariables);
         });
     });
   $;
   // Function to empty out the city variables section
   function clear() {
-    $("#article-section").empty();
+    $("#dashboard-section").empty();
   }
 });
 //   //
+// // Create the  list group to contain city variables and add the  content for each city
+// var $cityForecast = $("<ul>");
+// $cityForecast.addClass("list-group");
+// // Add the newly created element to the DOM
+// $(".weather-cards").append($cityForecast);
+
+// //--- create cityVariablesItem
+// var $cityForecasttItem = $("<li class='list-group-item cityVariables'>");
+
+// // console.log($cityVariablesItem);
+// $cityForecasttItem.append(
+//   "<h3>" + city + "  (" + reformatDate + "  )" + "</h2>"
+// );
+// // --------
+// //
+// $cityForecasttItem.append(
+//   "<h3>Temperature: " + tempCelcius.toFixed(3) + " Celcius" + "</h3>"
+// );
+// //
+// $cityForecasttItem.append("<h3>Wind: " + windSpeed + " KMH" + "</h3>");
+// // humidity variable
+// $cityForecasttItem.append("<h3>Humidity: " + humidity + " %" + "</h3>");
+// // console.log(windSpeed);
+// // console.log("validating variableListItem: ");
+// // console.log($cityVariablestItem);
+// // Append the variables
+// $cityForecast.append($cityForecasttItem);
+// $(".weather-cards").append($cityForecast);

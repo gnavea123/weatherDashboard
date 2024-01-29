@@ -40,11 +40,18 @@ h1 {
   display: flex;
   gap: 20px;
 }
-.weather-cards .card {
+.weather-cards ul {
   list-style: none;
   color: whitesmoke;
   background: rgb(35, 47, 114);
   padding: 19px 16px;
   border-radius: 5px;
   width: calc(100% / 5);
+}
+ul {
+  list-style: none;
+}
+
+li {
+  list-style: none;
 }
