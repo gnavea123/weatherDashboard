@@ -20,7 +20,7 @@ $("#search-button").on("click", function (event) {
   var queryURL =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
     city +
-    "&limit=5" +
+    "&limit=1" +
     "&appid=" +
     APIKey;
 
