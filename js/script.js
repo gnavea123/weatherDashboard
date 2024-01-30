@@ -31,12 +31,12 @@ $("#search-button").on("click", function (event) {
       return response.json();
     })
     .then(function (result) {
-      // console.log("Display Results geo API 1.0 : ");
-      // console.log(result);
-      // console.log("LAtitude");
-      // console.log(result["0"].lat);
-      // console.log("Longitud");
-      // console.log(result["0"].lon);
+      console.log("Display Results geo API 1.0 : ");
+      console.log(result);
+      console.log("LAtitude");
+      console.log(result["0"].lat);
+      console.log("Longitud");
+      console.log(result["0"].lon);
 
       // ------------------  getting info from API using lat and longitude coordinates
 
@@ -62,8 +62,8 @@ $("#search-button").on("click", function (event) {
           return response.json();
         })
         .then(function (result) {
-          // console.log("Display Results geo API 2.5.0 : ");
-          // console.log(result);
+          console.log("Display Results geo API 2.5.0 : ");
+          console.log(result);
           var today = dayjs();
           var reformatDate = dayjs(today).format("DD/MM/YYYY");
 
@@ -75,7 +75,7 @@ $("#search-button").on("click", function (event) {
           var humidity = result.main.humidity;
           var windSpeed = result.wind.speed;
           var tempKelvin = result.main.temp;
-          // console.log(tempKelvin);
+          console.log(tempKelvin);
           var tempCelcius = tempKelvin - 273.15;
           // CAlling DayJS for date format
 
@@ -115,20 +115,30 @@ $("#search-button").on("click", function (event) {
 
           // console.log($cityVariablesItem);
           $cityVariablestItem.append(
-            "<h2>" + city + "  (" + reformatDate + "  )" + "</h2>"
+            "<h2>" +
+              city +
+              "  (" +
+              reformatDate +
+              "  )" +
+              "<img src=" +
+              "https://openweathermap.org/img/wn/" +
+              result.weather[0].icon +
+              "@2x.png" +
+              ">" +
+              "</h2>"
           );
           // --------
-          // Article abstract details
+          //
 
-          //var abstract = article.abstract;
+          //   "<img src=" +"https://openweathermap.org/img/wn/" + result.weather[0].icon + "@2x.png" + ">"+
+          //   //
+
+          //temperature;
           $cityVariablestItem.append(
             "<h3>Temperature: " + tempCelcius.toFixed(2) + " Celcius" + "</h3>"
           );
 
-          //---Section Name for Article
-          // var section = article.section_name;
-          // console.log("Section Name: ");
-          // console.log(article.section_name);
+          //---windspeed
           $cityVariablestItem.append(
             "<h3>Wind: " + windSpeed + " KMH" + "</h3>"
           );
@@ -138,9 +148,9 @@ $("#search-button").on("click", function (event) {
             "<h3>Humidity: " + humidity + " %" + "</h3>"
           );
 
-          // console.log(windSpeed);
-          // console.log("validating variableListItem: ");
-          // console.log($cityVariablestItem);
+          console.log(windSpeed);
+          console.log("validating variableListItem: ");
+          console.log($cityVariablestItem);
 
           // Append the variables
           $cityVariables.append($cityVariablestItem);
@@ -153,32 +163,4 @@ $("#search-button").on("click", function (event) {
     $("#dashboard-section").empty();
   }
 });
-//   //
-// // Create the  list group to contain city variables and add the  content for each city
-// var $cityForecast = $("<ul>");
-// $cityForecast.addClass("list-group");
-// // Add the newly created element to the DOM
-// $(".weather-cards").append($cityForecast);
-
-// //--- create cityVariablesItem
-// var $cityForecasttItem = $("<li class='list-group-item cityVariables'>");
-
-// // console.log($cityVariablesItem);
-// $cityForecasttItem.append(
-//   "<h3>" + city + "  (" + reformatDate + "  )" + "</h2>"
-// );
-// // --------
-// //
-// $cityForecasttItem.append(
-//   "<h3>Temperature: " + tempCelcius.toFixed(3) + " Celcius" + "</h3>"
-// );
-// //
-// $cityForecasttItem.append("<h3>Wind: " + windSpeed + " KMH" + "</h3>");
-// // humidity variable
-// $cityForecasttItem.append("<h3>Humidity: " + humidity + " %" + "</h3>");
-// // console.log(windSpeed);
-// // console.log("validating variableListItem: ");
-// // console.log($cityVariablestItem);
-// // Append the variables
-// $cityForecast.append($cityForecasttItem);
-// $(".weather-cards").append($cityForecast);
+//
