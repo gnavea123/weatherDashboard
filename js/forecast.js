@@ -73,81 +73,77 @@ $("#search-button").on("click", function (event) {
 
       fetch(forecastQueryURL)
         .then((response) => response.json())
-        .then((result, index) => {
-          console.log("value of forecast resultset: ");
-          console.log(result.list);
-          // var temp = result.list.["0"].main.temp;
-          // console.log("value forecast temp: ");
-          // console.log(temp);
+        .then((resForecast) => {
+          // console.log("value of forecast resultset: ");
+          // console.log(result.list);
+
           //
-          var createWeatherCard = (result) => {
-            console.log("value of createWeatherCard: ");
-            console.log(createWeatherCard);
+          var createWeatherCard = (resForecast) => {
+            //console.log("value of createWeatherCard: ");
+            //console.log(createWeatherCard.list[0]);
             //   //
 
             // -- Capturing data to load to HTML
 
-            if (index === 0) {
-              weatherCardsDiv.innerHTML = "";
-              return "";
-            } else {
-              // Create the  list group to contain city variables and add the  content for each city
-              var $cityForecast = $("<ul>");
-              $cityForecast.addClass("main");
-              // Add the newly created element to the DOM
-              $(".weather-cards").append($cityForecast);
+            // if (resForecast.list[0]) {
+            //   weatherCardsDiv.innerHTML = "";
+            //   return "";
+            // } else {
+            // Create the  list group to contain city variables and add the  content for each city
+            var $cityForecast = $("<ul>");
+            $cityForecast.addClass("main");
+            // Add the newly created element to the DOM
+            $(".weather-cards").append($cityForecast);
 
-              //--- create cityVariablesItem
-              var $cityForecasttItem = $(
-                "<li class='cards-item cityVariables'>"
-              );
+            //--- create cityVariablesItem
+            var $cityForecasttItem = $("<li class='cards-item cityVariables'>");
 
-              //console.log($cityVariablesItem);
-              $cityForecasttItem.append(
-                "<h3>" + result.dt_txt.split(" ")[0] + "</h3>"
-              );
-              // icon
-              //  <img src="https://openweathermap.org/img/wn/04n@2x.png" alt="weather-icon">
-              console.log("value of icon location:");
-              console.log(result.weather[0].icon);
+            //console.log($cityVariablesItem);
+            $cityForecasttItem.append(
+              "<h3>" + resForecast.dt_txt.split(" ")[0] + "</h3>"
+            );
+            // icon
+            //  <img src="https://openweathermap.org/img/wn/04n@2x.png" alt="weather-icon">
+            // console.log("value of icon location:");
+            // console.log(resForecast.weather[0].icon);
 
-              $cityForecasttItem.append(
-                "<img src=" +
-                  "https://openweathermap.org/img/wn/" +
-                  result.weather[0].icon +
-                  "@2x.png" +
-                  // "+alt=" +
-                  // "weather-icon" +
-                  ">"
-                //
-              );
-
+            $cityForecasttItem.append(
+              "<img src=" +
+                "https://openweathermap.org/img/wn/" +
+                resForecast.weather[0].icon +
+                "@2x.png" +
+                // "+alt=" +
+                // "weather-icon" +
+                ">"
               //
+            );
 
-              $cityForecasttItem.append(
-                "<h4>Temp: " +
-                  (result.main.temp - 273.15).toFixed(2) +
-                  " °C" +
-                  "</h4>"
-              );
-              //
-              $cityForecasttItem.append(
-                "<h4>Wind: " + result.wind.speed + " KMH" + "</h4>"
-              );
-              // humidity variable
-              $cityForecasttItem.append(
-                "<h4>Humidity: " + result.main.humidity + " %" + "</h4>"
-              );
-              // console.log(windSpeed);
-              console.log("validating cityForecasttItem: ");
-              console.log($cityForecasttItem);
-              // Append the variables
-              $cityForecast.append($cityForecasttItem);
-              //$(".weather-cards").append($cityForecast);
+            //
 
-              console.log("Vaule of temp: ");
-              console.log(result.main.temp - 273.15);
-            } //-- end of if else statement
+            $cityForecasttItem.append(
+              "<h4>Temp: " +
+                (resForecast.main.temp - 273.15).toFixed(2) +
+                " °C" +
+                "</h4>"
+            );
+            //
+            $cityForecasttItem.append(
+              "<h4>Wind: " + resForecast.wind.speed + " KMH" + "</h4>"
+            );
+            // humidity variable
+            $cityForecasttItem.append(
+              "<h4>Humidity: " + resForecast.main.humidity + " %" + "</h4>"
+            );
+            // console.log(windSpeed);
+            // console.log("validating cityForecasttItem: ");
+            // console.log($cityForecasttItem);
+            // Append the variables
+            $cityForecast.append($cityForecasttItem);
+            //$(".weather-cards").append($cityForecast);
+
+            // console.log("Vaule of temp: ");
+            // console.log(resForecast.main.temp - 273.15);
+            // } //-- end of if else statement
           }; // -- end of createWeatherCard
 
           //  position of var fiveDaysForecast
@@ -155,34 +151,36 @@ $("#search-button").on("click", function (event) {
 
           var uniqueForecastDays = [];
           //--
-          console.log("Output from forecast query");
-          console.log(result);
+          // console.log("Output from forecast query");
+          // console.log(resForecast);
 
-          var fiveDaysForecast = result.list.filter((forecast, index) => {
+          var fiveDaysForecast = resForecast.list.filter((forecast, index) => {
             var forecastDate = new Date(forecast.dt_txt).getDate();
 
-            if (index === 0) {
-              weatherCardsDiv.innerHTML = "";
-              return "";
-            } else {
+            // console.log("Value of resForecast list[0]");
+            // console.log(resForecast.list[0]);
+
+            if (index >= 1) {
               if (!uniqueForecastDays.includes(forecastDate)) {
                 return uniqueForecastDays.push(forecastDate);
                 //
               } // end of include forecast
+            } else {
+              return "";
             } // End of if then else index
           }); // end of ilter
-          console.log("Display fiveDaysForecast variable: ");
-          console.log(fiveDaysForecast);
+          // console.log("Display fiveDaysForecast variable: ");
+          // console.log(fiveDaysForecast);
 
           // adding weather variables to html Cards for each forecast date
           //
 
           weatherCardsDiv.innerHTML = "";
 
-          fiveDaysForecast.forEach((result) => {
+          fiveDaysForecast.forEach((resForecast) => {
             weatherCardsDiv.insertAdjacentHTML(
               "afterend",
-              createWeatherCard(result)
+              createWeatherCard(resForecast)
               // $(".weather-cards").append($cityForecast);
             ); // end of inserADj
             if (createWeatherCard === "undefined") {

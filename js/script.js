@@ -31,12 +31,12 @@ $("#search-button").on("click", function (event) {
       return response.json();
     })
     .then(function (result) {
-      console.log("Display Results geo API 1.0 : ");
-      console.log(result);
-      console.log("LAtitude");
-      console.log(result["0"].lat);
-      console.log("Longitud");
-      console.log(result["0"].lon);
+      // console.log("Display Results geo API 1.0 : ");
+      // console.log(result);
+      // console.log("LAtitude");
+      // console.log(result["0"].lat);
+      // console.log("Longitud");
+      // console.log(result["0"].lon);
 
       // ------------------  getting info from API using lat and longitude coordinates
 
@@ -62,20 +62,20 @@ $("#search-button").on("click", function (event) {
           return response.json();
         })
         .then(function (result) {
-          console.log("Display Results geo API 2.5.0 : ");
-          console.log(result);
+          // console.log("Display Results geo API 2.5.0 : ");
+          // console.log(result);
           var today = dayjs();
           var reformatDate = dayjs(today).format("DD/MM/YYYY");
 
-          var currentHour = dayjs().format("HH");
-          console.log(reformatDate);
-          console.log(currentHour);
+          //var currentHour = dayjs().format("HH");
+          // console.log(reformatDate);
+          // console.log(currentHour);
 
           // --------------- setting up variables for City
           var humidity = result.main.humidity;
           var windSpeed = result.wind.speed;
           var tempKelvin = result.main.temp;
-          console.log(tempKelvin);
+          // console.log(tempKelvin);
           var tempCelcius = tempKelvin - 273.15;
           // CAlling DayJS for date format
 
@@ -129,6 +129,7 @@ $("#search-button").on("click", function (event) {
           );
           // --------
           //
+          //  localStorage.setItem(city, (reformatDate,tempCelcius,windSpeed,humidity));
 
           //   "<img src=" +"https://openweathermap.org/img/wn/" + result.weather[0].icon + "@2x.png" + ">"+
           //   //
@@ -152,9 +153,27 @@ $("#search-button").on("click", function (event) {
           console.log("validating variableListItem: ");
           console.log($cityVariablestItem);
 
+          localStorage.setItem(
+            city,
+            JSON.stringify({
+              reformatDate,
+              tempCelcius,
+              windSpeed,
+              humidity,
+            })
+          );
           // Append the variables
           $cityVariables.append($cityVariablestItem);
           $("#dashboard-section").append($cityVariables);
+          //var city = $(this).siblings("#search-input").val(); // captures the city element
+          //var value = JSON.stringify(cityVariablesItem);
+          // var value = JSON.stringify($cityVariablesItem);
+          // //var weatherDetails = $(this).parent().attr(cityVariablestItem); // captures the hour number for the row parent id
+
+          // // save to localStorage
+          // localStorage.setItem(city, value);
+
+          // console.log("success", "Task registered successfully");
         });
     });
   $;
