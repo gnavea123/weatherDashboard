@@ -24,7 +24,7 @@ $("#search-button").on("click", function (event) {
   //------------------  Geocoding API to obtain latitutde and longitude coordinates
   //
   var baseQueryURL =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
     city +
     "&limit=5" +
     "&appid=" +
