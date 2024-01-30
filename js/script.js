@@ -160,7 +160,6 @@ $("#search-button").on("click", function (event) {
               tempCelcius,
               windSpeed,
               humidity,
-              c,
             })
           );
           // Append the variables
